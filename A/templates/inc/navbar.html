@@ -1,0 +1,12 @@
+<div>
+    <ul>
+        <li><a href="{% url "home:home" %}">home</a></li>
+        
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url "account:user_logout" %}">logout</a></li>
+        {% else %}
+            <li><a href="{% url "account:user_register" %}">crete user</a></li>
+            <li><a href="{% url "account:user_login" %}">login</a></li>
+        {% endif %}
+    </ul>
+</div>
