@@ -4,6 +4,7 @@
         
         {% if request.user.is_authenticated %}
             <li><a href="{% url "account:user_logout" %}">logout</a></li>
+            <li><a href="{% url "account:user_profile" request.user.id %}">profile</a></li>
         {% else %}
             <li><a href="{% url "account:user_register" %}">crete user</a></li>
             <li><a href="{% url "account:user_login" %}">login</a></li>
