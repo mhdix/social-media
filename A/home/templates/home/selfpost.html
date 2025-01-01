@@ -3,7 +3,7 @@
 {% block content %}
 
     {% if request.user.id == user.id %}
-        <a href="">delete</a>
+        <a href="{% url 'home:post_delete' post.id %}">{{ post.id   }}</a>
     {% endif %}
 
     {% for post in posts %}

@@ -2,13 +2,14 @@
 
 
 {% block content %}
-
-    <a href="">delete</a>
-    
-    <p>{{ post.user.username }}</p>
-
+    detail page
+    {% if request.user.id == post.user.id %}
+        <a href="{% url 'home:post_delete' post.id %}">delete</a>
+    {% endif %}
+    <br>
+    <p><a hrtef="{% url 'account:user_profile' post.user.id %}">{{ post.user.username }}</a> -- {{ post.created_at|date:"Y" }}</p>
     <br><br><br>
-    
+
     <h1>{{ post.title }}</h1>
     <p>{{ post.description }}</p>
 {% endblock  %}
