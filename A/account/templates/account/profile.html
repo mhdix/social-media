@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2 class="text-center">{{ user.username }}</h2>
+    <a href="{% url 'account:user_profile' user.id %}" class="text-center">{{ user.username }}</a>
+    <!-- user profile -->
+    <br>
+    <br>
+    <br>
+    {% for post in posts %}
+        <a href=" {{ post.get_absolute_url }} ">{{ post.title }}</a>
+    {% endfor %}
 {% endblock  %}

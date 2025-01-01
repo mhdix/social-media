@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if request.user.id == user.id %}
+        <a href="">delete</a>
+    {% endif %}
+
+    {% for post in posts %}
+        <a href=" {{ post.get_absolute_url }} ">{{ post.title }}</a>
+    {% endfor %}
+{% endblock  %}

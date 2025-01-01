@@ -1,5 +1,8 @@
+from re import L
 from django.shortcuts import render, redirect
 from django.views import View
+
+from home.models import Post
 from .forms import UserRegisterForm , UserLoginForm
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -73,5 +76,6 @@ class UserLogoutView(LoginRequiredMixin, View):
     
 class UserProfileView(LoginRequiredMixin, View):
     def get(self, req, user_id):
-        user = User.objects.get(pk = user_id)
-        return  render(req, 'account/profile.html', {'user':user})
+        user = User.objects.get(pk=user_id)
+        posts = Post.objects.filter(user=user)
+        return  render(req, 'account/profile.html', {'user':user, 'posts':posts})
