@@ -4,6 +4,7 @@ from django.views import View
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from .forms import PostUpdateForm
 # Create your views here.
 
 
@@ -36,3 +37,20 @@ class DeletePostView(LoginRequiredMixin, View):
         return redirect('home:home')
 
 
+class PostUpdateView(LoginRequiredMixin, View):
+    form_class = PostUpdateForm
+
+    def dispatch(self, req, *args, **kwargs):
+        post = Post.objects.get(pk=kwargs['post_id'])
+        if not post.user.id == req.user.id:
+            messages.error(req, 'you cant update this post')
+            return redirect('home:home')
+        return super().dispatch(req, *args, **kwargs)
+
+    def get(self, req, post_id):
+        post = Post.objects.get(pk=post_id)
+        form = self.form_class(instance=post)
+        return render(req, 'home/update.html', {'form':form})
+                
+    def post(self, req, post_id):
+        pass

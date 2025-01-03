@@ -4,7 +4,8 @@
 {% block content %}
     detail page
     {% if request.user.id == post.user.id %}
-        <a href="{% url 'home:post_delete' post.id %}">delete</a>
+        <a href="{% url 'home:post_delete' post.id %}">Delete</a>
+        <a href="{% url 'home:post_update' post.id %}">E dit</a>
     {% endif %}
     <br>
     <p><a hrtef="{% url 'account:user_profile' post.user.id %}">{{ post.user.username }}</a> -- {{ post.created_at|date:"Y" }}</p>
